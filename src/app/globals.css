@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Design tokens
+ * Base: Seventh-day Adventist Church identity (General Conference).
+ * Screen palette: navy primary tuned for weight and legibility,
+ * gold accent derived from the CI secondary "Warm".
+ * ------------------------------------------------------------------ */
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, "Malgun Gothic", sans-serif;
+
+  --color-navy: #1b2f52;
+  --color-navy-deep: #13233f;
+  --color-gold: #f2b630;
+  --color-gold-soft: #f6c75a;
+  --color-ink: #111c27;
+  --color-text: #1d2a38;
+  --color-muted: #526171;
+  --color-line: #d6dde5;
+  --color-line-soft: #e6ebf0;
+  --color-soft: #f5f7f9;
+  --color-tint: #edf2fa;
+  --color-wash: #f1f6fb;
+  --color-tag: #c0d2e9;
+  --color-logo: #005587;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --animate-mega-in: mega-in 260ms var(--ease-out-soft);
+  --animate-progress: progress var(--progress-duration, 7s) linear forwards;
+
+  @keyframes mega-in {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+/* Site container: 1360px max, 32px gutters on desktop, 16px on phones */
+@utility wrap {
+  width: min(85rem, calc(100% - 4rem));
+  margin-inline: auto;
+  @media (max-width: 35rem) {
+    width: calc(100% - 2rem);
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-text antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3 {
+    @apply font-bold text-ink;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+  }
+  a {
+    text-underline-offset: 0.25em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-navy);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-navy);
+    color: #fff;
+  }
+  input {
+    caret-color: var(--color-navy);
+  }
+  * {
+    scrollbar-color: var(--color-navy) var(--color-soft);
+    scrollbar-width: thin;
+  }
+  time {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* Short navy rule above section headings */
+  .section-title::before {
+    content: "";
+    display: block;
+    width: 2rem;
+    height: 3px;
+    margin-bottom: 1rem;
+    background: var(--color-navy);
+  }
+
+  /* Crossfade stacks: every child shares one grid cell */
+  .fade-stack {
+    display: grid;
+  }
+  .fade-stack > * {
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+  }
+  .fade-stack > [data-current="true"] {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease, visibility 0s;
+  }
+
+  /* Slow zoom on the current hero photo */
+  .hero-photo {
+    transform: scale(1.06);
+    transition: transform 7.5s linear;
+  }
+  [data-current="true"] .hero-photo {
+    transform: scale(1);
+  }
+  .hero-panel {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.7s ease 0.25s, transform 0.7s var(--ease-out-soft) 0.25s;
+  }
+  [data-current="true"] .hero-panel {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Progress bars restart when their key changes; paused state freezes them */
+  .progress-bar {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  [data-current="true"] > .progress-bar,
+  [data-current="true"] .progress-bar {
+    animation: var(--animate-progress);
+  }
+  [data-paused="true"] .progress-bar {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-photo,
+  .hero-panel {
+    transform: none !important;
+  }
+}

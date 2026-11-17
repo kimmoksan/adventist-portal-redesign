@@ -7,7 +7,8 @@
 > 실제 서비스는 [adventist.or.kr](https://www.adventist.or.kr)에서 이용하세요.
 
 - **라이브 시안:** https://kimmoksan.github.io/adventist-portal-redesign/
-- **소스:** [`index.html`](index.html) — 빌드 없이 열리는 단일 파일 (HTML · CSS · 바닐라 JS)
+- **첫 HTML 시안:** https://kimmoksan.github.io/adventist-portal-redesign/prototype/ — Next.js로 옮기기 전 단일 HTML 버전
+- **스택:** Next.js 15 (App Router, 정적 내보내기) · TypeScript · Tailwind CSS 4 · lucide-react
 
 ## 무엇을 바꿨나
 
@@ -49,12 +50,53 @@
 
 - 기존 사이트의 전체 메뉴 구조와 실제 게시물 제목을 수집해 정보 구조의 기준으로 삼음
 - 5가지 방향(공식 포털, 오늘 일정판, 교단 뉴스룸, Creation Grid 브랜드, 찾기 허브)을 홈 전체 수준으로 시안화한 뒤 **공식 포털형**을 선택해 발전
-- Claude Code와 OpenAI Codex를 함께 사용해 시안을 병렬 제작하고, 브라우저 렌더링 검증과 디자인 품질 검사(impeccable)를 거쳐 다듬음
+- Claude Code와 OpenAI Codex를 함께 사용: 디자인 시스템 · 홈 · 공통 컴포넌트를 먼저 세운 뒤, 서브 페이지(뉴스 / 방송·오늘의 말씀 / 커뮤니티·검색·공통 템플릿)를 파일 범위를 나눠 병렬로 구현하고, 코드 리뷰 · 정적 빌드 · 브라우저 렌더링(1440px · 375px) 검증으로 마무리
 
-## 다음 단계
+## 페이지
 
-- Next.js(App Router) + TypeScript + Tailwind CSS로 컴포넌트화
-- 뉴스 목록·상세, 방송, 오늘의 말씀, 커뮤니티 게시판 등 서브 페이지 템플릿
+| 경로 | 내용 |
+|---|---|
+| `/` | 홈 |
+| `/news/`, `/news/[분류]/`, `/news/article/[id]/` | 뉴스 목록 · 분류별 · 기사 상세(링크 복사, 인쇄, 이전·다음, 관련 기사) |
+| `/broadcast/`, `/broadcast/[분류]/`, `/broadcast/watch/[id]/` | 방송 목록 · 분류별 · 시청 페이지와 다음 영상 |
+| `/today/` | 날짜별 안식일학교 교과 · 기도력 · 오늘의 성경 |
+| `/community/`, `/community/[게시판]/`, `/community/[게시판]/[id]/` | 게시판 목록 · 게시판(검색, 페이지) · 게시글 |
+| `/union/directory/` | 교회주소록(지역 · 이름 필터) |
+| `/search/` | 메뉴 · 뉴스 · 방송 · 게시판 통합 검색 |
+| `/[메뉴]/`, `/[메뉴]/[하위]/` | 신앙 · 선교 · 성경공부 · 지역교회 · 한국연합회 공통 템플릿 |
+| `/sitemap/` 외 | 사이트맵, 로그인 안내, 소개, 개인정보처리방침, 404 |
+
+전체 메뉴 80여 개가 모두 실제로 열리는 117개 정적 페이지로 빌드됩니다.
+
+## 구조
+
+```
+src/
+  app/            라우트(App Router). 동적 경로는 generateStaticParams로 정적 생성
+  components/
+    layout/       헤더 · 메가메뉴 · 모바일 메뉴 · 푸터 · PageHeader · SubNav · Brand
+    home/         홈 섹션
+    news/ broadcast/ today/ community/ search/ directory/   페이지별 컴포넌트
+    ui/           Tabs · ListRow · Photo · Pagination · EmptyState · SectionHeading · BackToTop
+    providers/    글자 크기 Provider
+  hooks/          useRotation (자동 넘김 · 일시정지 · 모션 줄이기 대응)
+  data/           타입이 붙은 샘플 콘텐츠. API나 CMS로 바꿀 때 화면 코드는 그대로
+  types/          콘텐츠 모델
+```
+
+- **디자인 토큰**은 `src/app/globals.css`의 `@theme` 한 곳에서 관리합니다(네이비 · 골드 · 중성색 · 모션).
+- **콘텐츠와 화면 분리**: 모든 화면은 `src/data`의 타입이 붙은 데이터만 읽습니다.
+- **오늘 날짜**는 콘텐츠를 수집한 2026-11-16으로 고정했습니다(`CONTENT_TODAY`).
+
+## 실행
+
+```bash
+npm ci
+npm run dev      # http://localhost:3000
+npm run build    # out/ 에 정적 사이트 생성
+```
+
+GitHub Actions가 PR마다 lint · 타입 검사 · 빌드를 실행하고, `main`에 합쳐지면 GitHub Pages에 배포합니다.
 
 ## 출처
 
