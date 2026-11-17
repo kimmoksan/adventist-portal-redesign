@@ -1,5 +1,5 @@
 import type { Broadcast } from "@/types/content";
-import { PHOTOS } from "./photos";
+import { ITEM_PHOTOS } from "./photos";
 
 /** Titles, speakers and programs from adventist.or.kr (2026-11-16). Durations and descriptions are samples. */
 export const BROADCASTS: Broadcast[] = [
@@ -11,7 +11,7 @@ export const BROADCASTS: Broadcast[] = [
     category: "교과해설",
     date: "2026-11-15",
     duration: "28:42",
-    photo: PHOTOS.bible,
+    photo: ITEM_PHOTOS.bcLesson8,
     description: "이번 주 장년 안교교과 8과를 요일별로 풀어 주는 해설 방송입니다.",
   },
   {
@@ -22,17 +22,17 @@ export const BROADCASTS: Broadcast[] = [
     category: "설교",
     date: "2026-11-14",
     duration: "36:15",
-    photo: PHOTOS.sanctuary,
+    photo: ITEM_PHOTOS.bcWhoToMeet,
     description: "안식일 예배 설교 영상입니다.",
   },
   {
-    id: "onevoice27-byeollae",
-    title: "[OneVoice27 주제가 콘테스트] 별내행복교회 - 마할랄렐",
+    id: "onevoice27-mangu",
+    title: "[OneVoice27 주제가 콘테스트] 망우동교회",
     program: "OneVoice27 주제가 콘테스트",
     category: "찬양",
     date: "2026-11-13",
     duration: "04:32",
-    photo: PHOTOS.community,
+    photo: ITEM_PHOTOS.bcMangu,
     description: "OneVoice27 주제가 콘테스트 참가 영상입니다.",
   },
   {
@@ -42,7 +42,7 @@ export const BROADCASTS: Broadcast[] = [
     category: "어린이",
     date: "2026-11-14",
     duration: "12:08",
-    photo: PHOTOS.children,
+    photo: ITEM_PHOTOS.bcKids298,
     description: "어린이예배 298화입니다.",
   },
   {
@@ -52,7 +52,7 @@ export const BROADCASTS: Broadcast[] = [
     category: "어린이",
     date: "2026-11-12",
     duration: "09:51",
-    photo: PHOTOS.hands,
+    photo: ITEM_PHOTOS.bcJunior7,
     description: "유년반 교과 7과 영상입니다.",
   },
   {
@@ -62,7 +62,7 @@ export const BROADCASTS: Broadcast[] = [
     category: "기획",
     date: "2026-11-11",
     duration: "03:20",
-    photo: PHOTOS.smallGroup,
+    photo: ITEM_PHOTOS.bc52Weeks,
     description: "OneVoice27 52주 챌린지 참여 방법을 안내합니다.",
   },
   {
@@ -72,7 +72,7 @@ export const BROADCASTS: Broadcast[] = [
     category: "선교지소식",
     date: "2026-11-10",
     duration: "15:04",
-    photo: PHOTOS.children,
+    photo: ITEM_PHOTOS.bcMission6,
     description: "해외 선교지의 소식을 전합니다.",
   },
 ];

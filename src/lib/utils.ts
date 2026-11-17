@@ -6,8 +6,9 @@ import type { Photo } from "@/types/content";
  */
 export const CONTENT_TODAY = "2026-11-16";
 
-export function unsplash(photo: Photo, width: number) {
-  return `https://images.unsplash.com/photo-${photo.id}?w=${width}&q=80&auto=format&fit=crop`;
+/** Public URL of a local photo; GitHub Pages serves the site under a base path. */
+export function photoSrc(photo: Photo) {
+  return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${photo.src}`;
 }
 
 /** "2026-11-16" -> "2026.11.16" */

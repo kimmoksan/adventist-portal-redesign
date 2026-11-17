@@ -11,10 +11,11 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   basePath: isPages ? `/${repo}` : undefined,
+  // next/image does not prefix basePath onto plain string sources, so photos read it from here.
+  env: { NEXT_PUBLIC_BASE_PATH: isPages ? `/${repo}` : "" },
   images: {
-    // Static export has no image optimizer; Unsplash already serves sized, compressed images.
+    // Static export has no image optimizer; photos in /public/photos are already resized and compressed.
     unoptimized: true,
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
 };
 
