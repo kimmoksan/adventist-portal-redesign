@@ -6,11 +6,16 @@ import { TodayPanel } from "@/components/home/TodayPanel";
 import { ServiceGrid } from "@/components/home/ServiceGrid";
 import { NewsSection } from "@/components/home/NewsSection";
 import { BroadcastSection } from "@/components/home/BroadcastSection";
-import { FaithSection, LocalUnionSection, StudyMissionSection } from "@/components/home/FaithSections";
+import { FaithStudySection } from "@/components/home/FaithSections";
 import { CommunitySection } from "@/components/home/CommunitySection";
 import { ChurchFinder } from "@/components/home/ChurchFinder";
-import { ConnectBand, LinkGroupsBand } from "@/components/home/LinkBands";
+import { LinkGroupsBand } from "@/components/home/LinkBands";
 
+/**
+ * Home, in priority order: today → services → news → broadcast →
+ * faith/study/mission → church news & boards → church finder → links.
+ * Everything else is one step away through the mega menu.
+ */
 export default function HomePage() {
   return (
     <>
@@ -27,13 +32,10 @@ export default function HomePage() {
       <ServiceGrid services={QUICK_SERVICES} />
       <NewsSection />
       <BroadcastSection items={BROADCASTS} />
-      <FaithSection />
-      <StudyMissionSection />
-      <LocalUnionSection />
       <CommunitySection />
+      <FaithStudySection />
       <ChurchFinder />
       <LinkGroupsBand />
-      <ConnectBand />
     </>
   );
 }

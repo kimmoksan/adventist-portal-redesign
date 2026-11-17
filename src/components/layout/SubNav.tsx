@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 /** Section sub-menu. Scrolls horizontally on phones; the current page is marked with aria-current. */
 export function SubNav({ section, activeHref }: { section: MenuSection; activeHref?: string }) {
   const pathname = usePathname();
-  const links = [{ label: "전체", href: menuHref(section.slug) }, ...section.items.map((i) => ({ label: i.label, href: menuHref(section.slug, i.slug) }))];
+  const links = [{ label: `${section.label} 홈`, href: menuHref(section.slug) }, ...section.items.map((i) => ({ label: i.label, href: menuHref(section.slug, i.slug) }))];
 
   return (
     <nav aria-label={`${section.label} 하위 메뉴`} className="border-t border-line bg-white">

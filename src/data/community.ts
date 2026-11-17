@@ -48,3 +48,35 @@ export function getPost(id: string) {
 
 /** Boards shown as tabs on the home page */
 export const HOME_BOARDS: BoardKey[] = ["jobs", "seekers", "market", "obituary"];
+
+/**
+ * Boards grouped by what they are for. The group decides the list layout, not the color:
+ * notices get a 공지 badge, prayer and fellowship boards read as cards with an excerpt,
+ * life-info boards stay a dense table, and 부고 stays quiet in gray.
+ */
+export type BoardKind = "notice" | "fellowship" | "life" | "condolence";
+
+export const BOARD_KIND: Record<BoardKey, BoardKind> = {
+  notice: "notice",
+  obituary: "condolence",
+  prayer: "fellowship",
+  marriage: "fellowship",
+  jobs: "life",
+  seekers: "life",
+  realestate: "life",
+  market: "life",
+  business: "life",
+};
+
+export const BOARD_GROUPS: Array<{ title: string; description: string; keys: BoardKey[] }> = [
+  { title: "알림", description: "공지와 부고", keys: ["notice", "obituary"] },
+  { title: "기도와 교제", description: "마음을 나누는 게시판", keys: ["prayer", "marriage"] },
+  { title: "생활 정보", description: "일자리 · 거래 · 사업체", keys: ["jobs", "seekers", "realestate", "market", "business"] },
+];
+
+/** Badge shown before a title when the post itself has no category tag. */
+export function boardBadge(key: BoardKey): { label: string; tone: "solid" | "muted" } | null {
+  if (key === "notice") return { label: "공지", tone: "solid" };
+  if (key === "obituary") return { label: "부고", tone: "muted" };
+  return null;
+}

@@ -4,7 +4,7 @@ import type { LucideIcon } from "lucide-react";
 import type { QuickService, QuickServiceIcon } from "@/types/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const ICONS: Record<QuickServiceIcon, LucideIcon> = {
+export const SERVICE_ICONS: Record<QuickServiceIcon, LucideIcon> = {
   bible: BookOpen,
   hymn: Music,
   lesson: CalendarDays,
@@ -21,7 +21,7 @@ export function ServiceGrid({ services }: { services: QuickService[] }) {
       <SectionHeading id="services-title" title="자주 찾는 서비스" size="md" more={{ label: "신앙 자료 보기", href: "/faith/" }} />
       <ul className="grid grid-cols-8 border-t border-l border-line max-lg:grid-cols-4 max-sm:grid-cols-2">
         {services.map((s) => {
-          const Icon = ICONS[s.icon];
+          const Icon = SERVICE_ICONS[s.icon];
           return (
             <li key={s.label} className="border-r border-b border-line">
               <Link

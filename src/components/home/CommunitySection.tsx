@@ -4,39 +4,58 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, HandHeart } from "lucide-react";
 import { BOARDS, HOME_BOARDS, postsOf } from "@/data/community";
-import { PRAYER_OF_THE_DAY } from "@/data/home";
+import { LOCAL_CHURCH_NEWS, PRAYER_OF_THE_DAY, UNION_NEWS } from "@/data/home";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ListRow } from "@/components/ui/ListRow";
 import { Tabs } from "@/components/ui/Tabs";
 import { formatShortDate } from "@/lib/utils";
 
-const LABELS = HOME_BOARDS.map((k) => BOARDS.find((b) => b.key === k)!.label);
+type Row = { key: string; href: string; title: string; tag?: string; meta?: string };
+type Panel = { label: string; href: string; rows: Row[] };
+
+/** 지역교회 · 연합회 소식 and the community boards share one tabbed list. */
+const PANELS: Panel[] = [
+  {
+    label: "지역교회 소식",
+    href: "/church/news/",
+    rows: LOCAL_CHURCH_NEWS.map((n) => ({ key: n.title, href: "/church/news/", title: n.title, tag: n.church })),
+  },
+  {
+    label: "연합회 소식",
+    href: "/union/department-events/",
+    rows: UNION_NEWS.map((n) => ({ key: n.title, href: "/union/department-events/", title: n.title, tag: n.department })),
+  },
+  ...HOME_BOARDS.map((k) => {
+    const board = BOARDS.find((b) => b.key === k)!;
+    return {
+      label: board.label,
+      href: `/community/${board.key}/`,
+      rows: postsOf(board.key)
+        .slice(0, 4)
+        .map((p) => ({ key: p.id, href: `/community/${p.board}/${p.id}/`, title: p.title, tag: p.tag, meta: formatShortDate(p.date) })),
+    };
+  }),
+];
+const LABELS = PANELS.map((p) => p.label);
 
 export function CommunitySection() {
   const [label, setLabel] = useState(LABELS[0]);
-  const board = BOARDS.find((b) => b.label === label)!;
-  const posts = postsOf(board.key).slice(0, 4);
+  const panel = PANELS.find((p) => p.label === label)!;
   const [prayed, setPrayed] = useState(false);
 
   return (
     <div className="wrap grid grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-12 py-12 max-lg:grid-cols-1 max-lg:gap-10 max-sm:py-10">
       <section aria-labelledby="community-title">
-        <SectionHeading id="community-title" title="커뮤니티" more={{ href: "/community/" }} className="mb-3" />
-        <Tabs label="커뮤니티 게시판" tabs={LABELS} value={label} onChange={setLabel} />
-        <div role="tabpanel" aria-label={`${label} 게시판`} className="min-h-56 max-sm:min-h-0">
+        <SectionHeading id="community-title" title="교회 소식 · 커뮤니티" more={{ href: "/community/" }} className="mb-3" />
+        <Tabs label="교회 소식과 게시판" tabs={LABELS} value={label} onChange={setLabel} className="max-sm:[&>button]:flex-none" />
+        <div role="tabpanel" aria-label={label} className="min-h-56 max-sm:min-h-0">
           <ul>
-            {posts.map((p) => (
-              <ListRow
-                key={p.id}
-                href={`/community/${p.board}/${p.id}/`}
-                title={p.title}
-                tag={p.tag}
-                meta={formatShortDate(p.date)}
-              />
+            {panel.rows.map((r) => (
+              <ListRow key={r.key} href={r.href} title={r.title} tag={r.tag} meta={r.meta} />
             ))}
           </ul>
-          <Link href={`/community/${board.key}/`} className="mt-2 inline-flex min-h-12 items-center gap-2 text-muted hover:text-navy hover:underline">
-            {label} 게시판 바로가기
+          <Link href={panel.href} className="mt-2 inline-flex min-h-12 items-center gap-2 text-muted hover:text-navy hover:underline">
+            {label} 바로가기
             <ArrowRight className="size-5" strokeWidth={1.75} aria-hidden />
           </Link>
         </div>

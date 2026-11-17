@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getBoard, postsOf } from "@/data/community";
+import { BOARD_KIND, getBoard, postsOf } from "@/data/community";
 import { findMenu, menuHref } from "@/data/menu";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -24,7 +24,7 @@ export default async function BoardPage({ params }: Props) {
     <>
       <PageHeader title={item.label} description={board?.description ?? `${item.label}에서 성도들의 이야기를 나눕니다.`} crumbs={[{ label: "커뮤니티", href: menuHref("community") }, { label: item.label }]} section={section} />
       <div className="wrap py-12">
-        {board ? <BoardList posts={[...postsOf(board.key)].sort((a, b) => b.date.localeCompare(a.date))} /> : <EmptyState title="공식 사이트에서 함께 나누세요" description={`이 콘셉트에서는 ${item.label} 메뉴를 안내합니다. 실제 콘텐츠는 재림마을 공식 사이트에서 이용해 주세요.`} />}
+        {board ? <BoardList kind={BOARD_KIND[board.key]} posts={[...postsOf(board.key)].sort((a, b) => b.date.localeCompare(a.date))} /> : <EmptyState title="공식 사이트에서 함께 나누세요" description={`이 콘셉트에서는 ${item.label} 메뉴를 안내합니다. 실제 콘텐츠는 재림마을 공식 사이트에서 이용해 주세요.`} />}
       </div>
     </>
   );

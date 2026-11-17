@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { POSTS, getBoard, postsOf } from "@/data/community";
+import { POSTS, boardBadge, getBoard, postsOf } from "@/data/community";
 import { findMenu, menuHref } from "@/data/menu";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ListRow, Tag } from "@/components/ui/ListRow";
@@ -22,6 +22,7 @@ export default async function PostPage({ params }: Props) {
   const post = POSTS.find((entry) => entry.id === id && entry.board === slug);
   if (!board || !post) notFound();
   const posts = [...postsOf(board.key)].sort((a, b) => b.date.localeCompare(a.date));
+  const badge = boardBadge(board.key);
   const index = posts.findIndex((entry) => entry.id === id);
   const previous = posts[index + 1];
   const next = posts[index - 1];
@@ -31,7 +32,7 @@ export default async function PostPage({ params }: Props) {
       <div className="wrap py-12">
         <article aria-label={`${board.label} 게시글`} className="mx-auto max-w-[68ch]">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-line pb-5 text-muted">
-            {(post.tag || board.key === "obituary") && <Tag tone={board.key === "obituary" ? "grape" : "navy"}>{post.tag ?? "부고"}</Tag>}
+            {post.tag ? <Tag>{post.tag}</Tag> : badge && <Tag tone={badge.tone}>{badge.label}</Tag>}
             <span>작성자 {post.author}</span><span aria-hidden>·</span><time dateTime={post.date}>{formatDate(post.date)}</time><span aria-hidden>·</span><span className="tabular">조회 {post.views.toLocaleString("ko-KR")}</span>
           </div>
           <div className="space-y-6 py-10 text-lg leading-[1.8]">{post.body.map((paragraph, i) => <p key={i}>{paragraph}</p>)}</div>

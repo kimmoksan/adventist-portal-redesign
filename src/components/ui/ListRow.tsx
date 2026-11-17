@@ -28,12 +28,14 @@ export function ListRow({
   );
 }
 
-export function Tag({ children, tone = "navy" }: { children: React.ReactNode; tone?: "navy" | "grape" }) {
+export function Tag({ children, tone = "navy" }: { children: React.ReactNode; tone?: "navy" | "solid" | "muted" }) {
   return (
     <span
       className={cn(
         "mr-2.5 inline-block shrink-0 rounded-[2px] border px-2 py-px text-[0.8125rem] leading-normal font-bold",
-        tone === "navy" ? "border-tag text-navy" : "border-[#7f264a] text-[#7f264a]",
+        tone === "navy" && "border-tag text-navy",
+        tone === "solid" && "border-navy bg-navy text-white",
+        tone === "muted" && "border-line bg-soft text-muted",
       )}
     >
       {children}

@@ -12,10 +12,12 @@ export function EmptyState({
   action?: { label: string; href: string };
 }) {
   const external = action.href.startsWith("http");
-  const cls = "mt-6 inline-flex min-h-12 items-center rounded-[2px] border border-navy px-5 font-semibold text-navy hover:bg-tint";
+  const cls = "mt-6 inline-flex min-h-12 items-center rounded-[3px] bg-navy px-5 font-semibold text-white hover:bg-navy-deep";
   return (
-    <div className="flex flex-col items-center border border-dashed border-line bg-soft px-6 py-16 text-center">
-      <Inbox className="mb-4 size-10 text-muted" strokeWidth={1.5} aria-hidden />
+    <div className="flex flex-col items-center rounded-[3px] border border-line bg-soft px-6 py-14 text-center">
+      <span className="mb-5 grid size-16 place-items-center rounded-full bg-white text-navy shadow-[0_2px_10px_-4px_rgba(19,35,63,0.3)]">
+        <Inbox className="size-8" strokeWidth={1.5} aria-hidden />
+      </span>
       <p className="text-xl font-bold text-ink">{title}</p>
       <p className="mt-2 max-w-[48ch] text-muted">{description}</p>
       {external ? (

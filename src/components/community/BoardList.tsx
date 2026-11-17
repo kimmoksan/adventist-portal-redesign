@@ -4,13 +4,41 @@ import Link from "next/link";
 import { useState } from "react";
 import { PencilLine, Search } from "lucide-react";
 import type { BoardPost } from "@/types/content";
+import { boardBadge, type BoardKind } from "@/data/community";
 import { menuHref } from "@/data/menu";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Tag } from "@/components/ui/ListRow";
 import { Pagination } from "@/components/ui/Pagination";
 import { formatDate } from "@/lib/utils";
 
-export function BoardList({ posts }: { posts: BoardPost[] }) {
+function PostTag({ post }: { post: BoardPost }) {
+  if (post.tag) return <Tag>{post.tag}</Tag>;
+  const badge = boardBadge(post.board);
+  return badge ? <Tag tone={badge.tone}>{badge.label}</Tag> : null;
+}
+
+/** Prayer and fellowship boards: each post as a card with a two-line excerpt, so the words come first. */
+function CardList({ posts }: { posts: BoardPost[] }) {
+  return (
+    <ul className="grid gap-4 border-t-2 border-navy pt-4 md:grid-cols-2">
+      {posts.map((post) => (
+        <li key={post.id}>
+          <Link href={`${menuHref("community", post.board)}${post.id}/`} className="group flex h-full flex-col border border-line bg-white p-6 hover:border-navy max-sm:p-5">
+            <strong className="text-xl leading-snug text-ink group-hover:text-navy group-hover:underline">{post.title}</strong>
+            <span className="mt-3 line-clamp-2 leading-[1.8] text-text">{post.body[0]}</span>
+            <span className="mt-auto flex flex-wrap gap-x-3 pt-4 text-muted">
+              <span>{post.author}</span>
+              <span aria-hidden>·</span>
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function BoardList({ posts, kind = "life" }: { posts: BoardPost[]; kind?: BoardKind }) {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [writingNote, setWritingNote] = useState(false);
@@ -36,7 +64,9 @@ export function BoardList({ posts }: { posts: BoardPost[] }) {
         {writingNote && <p className="mb-6 border border-line bg-soft p-5 leading-[1.8]">글쓰기는 재림마을 공식 사이트에서 이용하실 수 있습니다. <a href="https://www.adventist.or.kr" className="inline-flex min-h-12 items-center font-semibold text-navy underline">공식 사이트로 이동</a></p>}
       </div>
       <p aria-live="polite" className="mb-3 text-muted">전체 <strong className="font-semibold text-ink tabular">{filtered.length}</strong>건</p>
-      {visible.length ? (
+      {visible.length && kind === "fellowship" ? (
+        <CardList posts={visible} />
+      ) : visible.length ? (
         <table className="block w-full border-t-2 border-navy md:table">
           <caption className="sr-only">게시글 목록 · 번호, 제목, 작성자, 날짜, 조회</caption>
           <thead className="hidden bg-soft md:table-header-group">
@@ -54,7 +84,7 @@ export function BoardList({ posts }: { posts: BoardPost[] }) {
                 <td className="text-muted tabular md:px-3 md:py-4"><span className="md:sr-only">번호 </span>{filtered.length - (page - 1) * 10 - index}</td>
                 <td className="order-first w-full min-w-0 md:table-cell md:w-auto md:px-3">
                   <Link href={`${menuHref("community", post.board)}${post.id}/`} className="flex min-h-12 min-w-0 flex-wrap items-center gap-y-2 py-2 font-semibold hover:text-navy hover:underline">
-                    {(post.tag || post.board === "obituary") && <Tag tone={post.board === "obituary" ? "grape" : "navy"}>{post.tag ?? "부고"}</Tag>}
+                    <PostTag post={post} />
                     <span className="min-w-0">{post.title}</span>
                   </Link>
                 </td>
