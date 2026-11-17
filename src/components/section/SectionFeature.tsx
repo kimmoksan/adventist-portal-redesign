@@ -38,9 +38,14 @@ export function SectionFeature({ slug }: { slug: string }) {
             <ul className="grid grid-cols-3 gap-4 max-sm:grid-cols-1">
               {MAGAZINES.map((m) => (
                 <li key={m.title}>
-                  <Link href={m.href} className={`${box} p-4`}>
-                    <span className="mb-4 flex aspect-[4/3] flex-col justify-between rounded-[2px] bg-navy p-4 text-white max-sm:aspect-[5/2]">
-                      <span className="text-xl font-bold">{m.magazine}</span>
+                  <Link
+                    href={m.href}
+                    className={`${box} p-4 max-sm:flex-row max-sm:items-center max-sm:gap-4 max-sm:p-3`}
+                  >
+                    <span className="mb-4 flex aspect-[4/3] flex-col justify-between rounded-[2px] bg-navy p-4 text-white max-sm:mb-0 max-sm:aspect-auto max-sm:w-28 max-sm:shrink-0 max-sm:gap-3 max-sm:p-3">
+                      <span className="text-xl font-bold max-sm:text-base">
+                        {m.magazine}
+                      </span>
                       <span aria-hidden className="h-1 w-10 bg-gold" />
                     </span>
                     <span className="line-clamp-2 font-semibold text-ink group-hover:text-navy group-hover:underline">
@@ -108,7 +113,7 @@ export function SectionFeature({ slug }: { slug: string }) {
         >
           <Link
             href="/mission/daily/"
-            className="group relative block min-h-80 overflow-hidden rounded-[3px] bg-navy-deep"
+            className="group relative block min-h-80 overflow-hidden rounded-[3px] bg-navy-deep max-md:min-h-0"
           >
             {lead.photo && (
               <Photo
@@ -117,10 +122,10 @@ export function SectionFeature({ slug }: { slug: string }) {
                 fill
                 decorative
                 sizes="(max-width: 1024px) 100vw, 55vw"
-                className="transition-transform duration-500 group-hover:scale-[1.03]"
+                className="transition-transform duration-500 group-hover:scale-[1.03] max-md:hidden"
               />
             )}
-            <span className="absolute inset-x-0 bottom-0 bg-navy-deep/90 p-6 text-white">
+            <span className="absolute inset-x-0 bottom-0 bg-navy-deep/90 p-6 text-white max-md:static max-md:block max-md:p-5">
               <span className="block font-semibold text-gold-soft">
                 {lead.source}
               </span>
@@ -197,7 +202,7 @@ export function SectionFeature({ slug }: { slug: string }) {
                 key={n.title}
                 className="flex items-start gap-4 border-b border-line py-3.5 max-sm:block"
               >
-                <span className="w-28 shrink-0 font-semibold text-navy">
+                <span className="w-28 shrink-0 font-semibold text-navy max-sm:block max-sm:w-auto max-sm:text-[0.9375rem]">
                   {n.department}
                 </span>
                 <Link

@@ -284,9 +284,9 @@ function UnionHero({ title, breadcrumb, identity }: HeroProps) {
         <p className="mt-2 text-lg text-muted">한국 재림교회의 행정과 부서, 기관을 안내합니다.</p>
       </div>
       <div className="mt-7 grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-6 max-lg:grid-cols-1">
-        <dl className="grid grid-cols-3 self-start rounded-[3px] border border-line bg-white max-sm:grid-cols-1">
+        <dl className="grid grid-cols-3 self-start rounded-[3px] border border-line bg-white max-sm:grid-cols-2">
           {facts.map((f) => (
-            <div key={f.label} className="border-line px-5 py-4 not-last:border-r max-sm:not-last:border-r-0 max-sm:not-last:border-b">
+            <div key={f.label} className="border-line px-5 py-4 not-last:border-r max-sm:px-4 max-sm:py-3 max-sm:first:col-span-2 max-sm:first:border-r-0 max-sm:first:border-b">
               <dt className="text-[0.9375rem] text-muted">{f.label}</dt>
               <dd className="mt-1 text-lg font-bold text-ink tabular">
                 {f.href ? (
