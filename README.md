@@ -101,5 +101,5 @@ GitHub Actions가 PR마다 lint · 타입 검사 · 빌드를 실행하고, `mai
 ## 출처
 
 - 재림교회 로고와 색: 제칠일안식일예수재림교 한국연합회 [재림교회 CI](https://www.adventist.or.kr/korean_union_conference/bbs/content.php?co_id=corporate_identity). 로고의 권리는 해당 단체에 있습니다.
-- 사진: [Unsplash](https://unsplash.com) (Unsplash License)
+- 사진: 재림마을(adventist.or.kr) 뉴스·호프채널·성경통신학교·한국연합회 게시판 사진을 줄여 `public/photos`에 저장 (리디자인 제안용)
 - 폰트: [Pretendard](https://github.com/orioncactus/pretendard) (SIL OFL 1.1)

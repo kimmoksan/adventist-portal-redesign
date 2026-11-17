@@ -5,8 +5,8 @@
  */
 
 export type Photo = {
-  /** Unsplash photo id, e.g. "1519491050282-cf00c82424b4" */
-  id: string;
+  /** Path under /public, e.g. "/photos/prayer.jpg" (the base path is added when rendered) */
+  src: string;
   alt: string;
 };
 

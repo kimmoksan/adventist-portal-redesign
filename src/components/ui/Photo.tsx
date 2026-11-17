@@ -1,10 +1,10 @@
 import Image from "next/image";
 import type { Photo as PhotoData } from "@/types/content";
-import { cn, unsplash } from "@/lib/utils";
+import { cn, photoSrc } from "@/lib/utils";
 
 type Props = {
   photo: PhotoData;
-  /** Requested pixel width from the CDN */
+  /** Intrinsic width used to reserve space before the image loads */
   width: number;
   /** Rendered aspect ratio, e.g. "16/9". Ignored when `fill` is set. */
   ratio?: string;
@@ -20,7 +20,7 @@ export function Photo({ photo, width, ratio = "16/10", fill, decorative, priorit
   const [w, h] = ratio.split("/").map(Number);
   return (
     <Image
-      src={unsplash(photo, width)}
+      src={photoSrc(photo)}
       alt={decorative ? "" : photo.alt}
       width={width}
       height={Math.round((width * h) / w)}

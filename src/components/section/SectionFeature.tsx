@@ -42,14 +42,26 @@ export function SectionFeature({ slug }: { slug: string }) {
                     href={m.href}
                     className={`${box} p-4 max-sm:flex-row max-sm:items-center max-sm:gap-4 max-sm:p-3`}
                   >
-                    <span className="mb-4 flex aspect-[4/3] flex-col justify-between rounded-[2px] bg-navy p-4 text-white max-sm:mb-0 max-sm:aspect-auto max-sm:w-28 max-sm:shrink-0 max-sm:gap-3 max-sm:p-3">
-                      <span className="text-xl font-bold max-sm:text-base">
+                    <span className="relative mb-4 block overflow-hidden rounded-[2px] bg-navy max-sm:mb-0 max-sm:w-28 max-sm:shrink-0">
+                      <Photo
+                        photo={m.photo}
+                        width={360}
+                        ratio="16/9"
+                        decorative
+                        sizes="(max-width: 640px) 7rem, 20vw"
+                        className="transition-transform duration-300 group-hover:scale-[1.03]"
+                      />
+                      <span className="absolute bottom-0 left-0 bg-navy px-2.5 py-1 text-sm font-bold text-white max-sm:hidden">
                         {m.magazine}
                       </span>
-                      <span aria-hidden className="h-1 w-10 bg-gold" />
                     </span>
-                    <span className="line-clamp-2 font-semibold text-ink group-hover:text-navy group-hover:underline">
-                      {m.title}
+                    <span className="min-w-0">
+                      <span className="mb-1 hidden text-sm font-bold text-navy max-sm:block">
+                        {m.magazine}
+                      </span>
+                      <span className="line-clamp-2 font-semibold text-ink group-hover:text-navy group-hover:underline">
+                        {m.title}
+                      </span>
                     </span>
                   </Link>
                 </li>
@@ -196,20 +208,31 @@ export function SectionFeature({ slug }: { slug: string }) {
             more={{ href: "/union/department-events/" }}
             className="mb-3"
           />
-          <ul className="border-t-2 border-navy">
+          <ul className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
             {UNION_NEWS.map((n) => (
-              <li
-                key={n.title}
-                className="flex items-start gap-4 border-b border-line py-3.5 max-sm:block"
-              >
-                <span className="w-28 shrink-0 font-semibold text-navy max-sm:block max-sm:w-auto max-sm:text-[0.9375rem]">
-                  {n.department}
-                </span>
+              <li key={n.title}>
                 <Link
                   href="/union/department-events/"
-                  className="hover:text-navy hover:underline"
+                  className={`${box} overflow-hidden max-md:flex-row max-md:items-center max-md:gap-4 max-md:p-3`}
                 >
-                  {n.title}
+                  <span className="block overflow-hidden max-md:w-28 max-md:shrink-0 max-md:rounded-[2px]">
+                    <Photo
+                      photo={n.photo}
+                      width={360}
+                      ratio="16/9"
+                      decorative
+                      sizes="(max-width: 768px) 7rem, 30vw"
+                      className="transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  </span>
+                  <span className="block min-w-0 p-4 max-md:p-0">
+                    <span className="block text-[0.9375rem] font-semibold text-navy">
+                      {n.department}
+                    </span>
+                    <span className="mt-1 line-clamp-2 font-semibold text-ink group-hover:underline">
+                      {n.title}
+                    </span>
+                  </span>
                 </Link>
               </li>
             ))}

@@ -1,5 +1,5 @@
 import type { NewsArticle, NewsCategory, Notice } from "@/types/content";
-import { PHOTOS } from "./photos";
+import { ITEM_PHOTOS, PHOTOS } from "./photos";
 
 const SAMPLE_BODY = (topic: string) => [
   `${topic}에 관한 기사의 샘플 본문입니다. 실제 기사는 재림마을 뉴스에서 확인하실 수 있습니다.`,
@@ -16,7 +16,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-16",
     summary: "삼육교육이 미국 라로슈대학과 교류 협약을 맺고 학생 교류와 공동 프로그램을 추진합니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.smallGroup,
+    photo: ITEM_PHOTOS.newsLaroche,
     body: SAMPLE_BODY("삼육교육과 라로슈대학의 협약"),
   },
   {
@@ -26,7 +26,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-15",
     summary: "북아시아태평양지회 연례행정위원회 보고에서 올해 침례자 수가 전년보다 크게 늘었다는 소식이 전해졌습니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.children,
+    photo: PHOTOS.baptism,
     body: SAMPLE_BODY("북아태지회 연례 보고"),
   },
   {
@@ -36,7 +36,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-14",
     summary: "11월 15일부터 21일까지 ‘새로운 세상, 함께 전해요’를 주제로 디지털미션위크가 열립니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.hands,
+    photo: ITEM_PHOTOS.newsDigitalMissionWeek,
     body: SAMPLE_BODY("2026 디지털미션위크"),
   },
   {
@@ -46,7 +46,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-16",
     summary: "삼육교육 국제 교류망 KONEXION이 참여 학교를 넓혀 갑니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.smallGroup,
+    photo: ITEM_PHOTOS.newsKonexion,
     body: SAMPLE_BODY("KONEXION 교육망 확대"),
   },
   {
@@ -56,7 +56,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-16",
     summary: "삼육식품이 임직원을 대상으로 신앙부흥회를 열었습니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.sanctuary,
+    photo: PHOTOS.gathering,
     body: SAMPLE_BODY("삼육식품 직원 신앙부흥회"),
   },
   {
@@ -66,7 +66,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-15",
     summary: "연례행정위원회가 폐회하며 재정교역자 인사관리 규정을 새로 마련했습니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.bible,
+    photo: PHOTOS.meeting,
     body: SAMPLE_BODY("연례행정위원회 결의"),
   },
   {
@@ -76,7 +76,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-14",
     summary: "창조신앙지도자 양성 과정 ‘Creation Insight’가 수강생을 모집합니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.community,
+    photo: ITEM_PHOTOS.newsCreation,
     body: SAMPLE_BODY("창조신앙지도자 과정"),
   },
   {
@@ -86,7 +86,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-13",
     summary: "서울삼육고가 묵동교회를 찾아 학부모와 함께 대입 변화와 삼육교육을 나눴습니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.smallGroup,
+    photo: ITEM_PHOTOS.newsMukdong,
     body: SAMPLE_BODY("서울삼육고 교회 방문 설명회"),
   },
   {
@@ -96,7 +96,7 @@ export const NEWS: NewsArticle[] = [
     date: "2026-11-13",
     summary: "학교 카페 동아리 학생들이 이웃 어르신께 두유를 전하는 나눔을 이어 가고 있습니다.",
     author: "재림마을 뉴스센터",
-    photo: PHOTOS.hands,
+    photo: ITEM_PHOTOS.newsMasil,
     body: SAMPLE_BODY("마실:터 동아리 나눔"),
   },
 ];

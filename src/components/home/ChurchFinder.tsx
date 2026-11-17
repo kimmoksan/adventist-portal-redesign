@@ -56,7 +56,7 @@ export function ChurchFinder() {
           </form>
           <p className="mt-4 text-[0.9375rem] text-[#c9d8e7]">동중한 · 서중한 · 영남 · 충청 · 호남합회와 제주대회의 교회를 한 번에 찾습니다.</p>
         </div>
-        <Photo photo={PHOTOS.hands} width={900} ratio="21/10" sizes="(max-width: 1024px) 100vw, 45vw" className="rounded" />
+        <Photo photo={PHOTOS.worship} width={900} ratio="21/10" sizes="(max-width: 1024px) 100vw, 45vw" className="rounded" />
       </div>
     </section>
   );

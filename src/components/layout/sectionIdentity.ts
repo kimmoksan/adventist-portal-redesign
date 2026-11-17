@@ -48,7 +48,7 @@ export type SectionIdentity = { icon: LucideIcon; photo: Photo; links: Array<{ l
 export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   news: {
     icon: Newspaper,
-    photo: PHOTOS.community,
+    photo: PHOTOS.meeting,
     links: [
       { label: "전체기사", href: "/news/all/" },
       { label: "특별기획", href: "/news/feature/" },
@@ -57,7 +57,7 @@ export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   },
   broadcast: {
     icon: MonitorPlay,
-    photo: PHOTOS.sanctuary,
+    photo: PHOTOS.choir,
     links: [
       { label: "예배", href: "/broadcast/worship/" },
       { label: "교과해설", href: "/broadcast/lesson/" },
@@ -66,7 +66,7 @@ export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   },
   faith: {
     icon: BookOpen,
-    photo: PHOTOS.bible,
+    photo: PHOTOS.prayer,
     links: [
       { label: "오늘의 말씀", href: "/today/" },
       { label: "성경", href: "/faith/bible/" },
@@ -75,7 +75,7 @@ export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   },
   mission: {
     icon: Send,
-    photo: PHOTOS.children,
+    photo: PHOTOS.baptism,
     links: [
       { label: "디지털 전도지", href: "/mission/tract/" },
       { label: "동영상 콘텐츠", href: "/mission/video/" },
@@ -84,7 +84,7 @@ export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   },
   study: {
     icon: GraduationCap,
-    photo: PHOTOS.smallGroup,
+    photo: PHOTOS.meeting2,
     links: [
       { label: "온라인 성경 공부", href: "/study/online/" },
       { label: "인기 강의", href: "/study/popular/" },
@@ -93,7 +93,7 @@ export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   },
   church: {
     icon: Church,
-    photo: PHOTOS.sanctuary,
+    photo: PHOTOS.worship,
     links: [
       { label: "지역교회 소식", href: "/church/news/" },
       { label: "교회주소록", href: "/union/directory/" },
@@ -101,7 +101,7 @@ export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   },
   union: {
     icon: Building2,
-    photo: PHOTOS.hands,
+    photo: PHOTOS.missionaries,
     links: [
       { label: "조직 및 연락처", href: "/union/organization/" },
       { label: "교회주소록", href: "/union/directory/" },
@@ -110,7 +110,7 @@ export const SECTION_IDENTITY: Record<string, SectionIdentity> = {
   },
   community: {
     icon: Users,
-    photo: PHOTOS.community,
+    photo: PHOTOS.gathering,
     links: [
       { label: "공지사항", href: "/community/notice/" },
       { label: "공감기도", href: "/community/prayer/" },

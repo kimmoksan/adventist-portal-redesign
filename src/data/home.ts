@@ -1,5 +1,5 @@
 import type { HeroSlide, LinkGroup, Photo, QuickService } from "@/types/content";
-import { PHOTOS } from "./photos";
+import { ITEM_PHOTOS, PHOTOS } from "./photos";
 
 export const HERO_SLIDES: HeroSlide[] = [
   {
@@ -9,7 +9,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     subtitle: "#AllThingsNew\n새로운 세상, 함께 전해요",
     meta: "11.15(일) ~ 11.21(토)",
     cta: { label: "자세히 보기", href: "/news/article/digital-mission-week-2026/" },
-    photo: PHOTOS.sanctuary,
+    photo: PHOTOS.prayer,
   },
   {
     id: "onevoice27",
@@ -18,7 +18,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     subtitle: "52주 챌린지 참여방법 안내",
     meta: "한국연합회 · 디지털선교부",
     cta: { label: "방송 보기", href: "/broadcast/" },
-    photo: PHOTOS.community,
+    photo: PHOTOS.choir,
   },
   {
     id: "strategy",
@@ -27,7 +27,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     subtitle: "한국연합회의 선교 소식을 전합니다",
     meta: "한국연합회 · 선교 자료",
     cta: { label: "자세히 보기", href: "/union/" },
-    photo: PHOTOS.smallGroup,
+    photo: PHOTOS.meeting,
   },
 ];
 
@@ -43,9 +43,9 @@ export const QUICK_SERVICES: QuickService[] = [
 ];
 
 export const MAGAZINES = [
-  { magazine: "시조", title: "AI 시대의 소명", href: "/faith/magazine/" },
-  { magazine: "가정과 건강", title: "고령층 낙상 주의보", href: "/faith/magazine/" },
-  { magazine: "교회지남", title: "영남합회 제14기 SOS 청소년 선교사들의 도전과 성장", href: "/faith/magazine/" },
+  { magazine: "시조", title: "AI 시대의 소명", href: "/faith/magazine/", photo: ITEM_PHOTOS.magAi },
+  { magazine: "가정과 건강", title: "고령층 낙상 주의보", href: "/faith/magazine/", photo: ITEM_PHOTOS.magFall },
+  { magazine: "교회지남", title: "영남합회 제14기 SOS 청소년 선교사들의 도전과 성장", href: "/faith/magazine/", photo: ITEM_PHOTOS.magSos },
 ];
 
 export const BOOKS = [
@@ -55,13 +55,13 @@ export const BOOKS = [
 ];
 
 export const COURSES: Array<{ title: string; description: string; photo: Photo; href: string }> = [
-  { title: "말씀 향기", description: "세상의 누구보다 소중한 당신에게 생명의 등불을 비춰 드립니다.", photo: PHOTOS.bible, href: "/study/popular/" },
-  { title: "다니엘서 연구", description: "당신의 영적 여정에 깊이와 통찰을 더해보세요.", photo: PHOTOS.smallGroup, href: "/study/popular/" },
-  { title: "건강 새 출발", description: "건강한 삶을 열어갈 기회, 지금부터 시작해도 늦지 않아요.", photo: PHOTOS.community, href: "/study/popular/" },
+  { title: "말씀 향기", description: "세상의 누구보다 소중한 당신에게 생명의 등불을 비춰 드립니다.", photo: ITEM_PHOTOS.courseWord, href: "/study/popular/" },
+  { title: "청소년 다니엘서", description: "다니엘서의 예언을 직접 풀고, 미래를 볼 수 있어요.", photo: ITEM_PHOTOS.courseDaniel, href: "/study/popular/" },
+  { title: "건강 새 출발", description: "건강한 삶을 열어갈 기회, 지금부터 시작해도 늦지 않아요.", photo: ITEM_PHOTOS.courseHealth, href: "/study/popular/" },
 ];
 
 export const MISSION_CONTENT = [
-  { source: "한국연합회 디지털선교전략부", title: "답장 없던 3년, 그리고 “저 지금 교회에 나갑니다”", photo: PHOTOS.hands },
+  { source: "한국연합회 디지털선교전략부", title: "답장 없던 3년, 그리고 “저 지금 교회에 나갑니다”", photo: PHOTOS.missionaries },
   { source: "호프채널 프레이즈", title: "[S soloist ensemble] God will take care of you 너 근심 걱정 말아라" },
   { source: "남대극 목사 성경 어휘연구", title: "199편 “매월 초하루와 매 안식일에”" },
   { source: "성경통신학교", title: "에덴동산에는 헬스장이 필요 없었습니다" },
@@ -75,9 +75,9 @@ export const LOCAL_CHURCH_NEWS = [
 ];
 
 export const UNION_NEWS = [
-  { department: "디지털선교부", title: "디지털선교 강조 안식일" },
-  { department: "아드라", title: "이웃의 겨울, 김치와 식료품 한 상자로 든든하게 채워 주세요." },
-  { department: "북한선교부", title: "2026 세계 북한선교 기도 안식일" },
+  { department: "디지털선교부", title: "디지털선교 강조 안식일", photo: ITEM_PHOTOS.evDigital },
+  { department: "아드라", title: "이웃의 겨울, 김치와 식료품 한 상자로 든든하게 채워 주세요.", photo: ITEM_PHOTOS.evAdra },
+  { department: "북한선교부", title: "2026 세계 북한선교 기도 안식일", photo: ITEM_PHOTOS.evNorthKorea },
 ];
 
 export const PRAYER_OF_THE_DAY =
